@@ -85,12 +85,10 @@ const temp = [
 
 temp.forEach((day, index) => {
     console.log(`День ${index + 1}:`);
-    console.log(`  Вранці: ${day.morning}°C`);
-    console.log(`  Вдень: ${day.day}°C`);
-    console.log(`  Ввечері: ${day.evening}°C`);
+    console.log(`Вранці: ${day.morning}°C`);
+    console.log(`Вдень: ${day.day}°C`);
+    console.log(`Ввечері: ${day.evening}°C`);
 });
-
-
 
 
 // Logical  ramifications
