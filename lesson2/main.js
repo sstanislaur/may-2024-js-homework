@@ -73,6 +73,16 @@ console.log(user[8].password);
 console.log(user[9].password);
 
 
+const temp = [
+    {morning: 18, day: 25, evening: 20},
+    {morning: 17, day: 24, evening: 19},
+    {morning: 19, day: 26, evening: 21},
+    {morning: 16, day: 23, evening: 18},
+    {morning: 20, day: 27, evening: 22},
+    {morning: 18, day: 25, evening: 20},
+    {morning: 17, day: 24, evening: 19},
+];
+console.log(temp);
 
 
 // Logical  ramifications
@@ -83,6 +93,7 @@ if (x != 0) {
     console.log("Вірно");
 } else {
     console.log("Невірно");
+
 }
 if (x != 1) {
     console.log("Вірно");
