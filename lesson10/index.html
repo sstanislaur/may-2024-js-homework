@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+<body>
+<div id="text">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, asperiores blanditiis deserunt
+    distinctio dolorum enim, ex harum in labore necessitatibus nesciunt nisi, numquam odio officiis perferendis
+    provident similique soluta tempore?
+</div>
+
+<button id="btn">but</button>
+
+<!--////////////////////////////////////////////////-->
+
+<form name="someForm">
+    <input type="text" name="name">
+    <input type="text" name="surname">
+    <input type="number" name="age">
+    <button>send</button>
+</form>
+
+<div id="result"></div>
+
+<!--////////////////////////////////////////////////-->
+
+<div id="block"></div>
+
+<!--////////////////////////////////////////////////-->
+
+<input id="foo" type="number">
+<div id="res"></div>
+
+<!--////////////////////////////////////////////////-->
+
+<form name="tableGeneratorForm">
+    <input type="number" name="lines">
+    <input type="number" name="cells">
+    <input type="text" name="data">
+    <button>generate</button>
+</form>
+
+
+<script>
+    const button = document.getElementById('btn')
+
+    button.onclick = function () {
+        document.getElementById('text').remove()
+    }
+
+    ////////////////////////////////////////////////
+
+    const someForm = document.forms.someForm;
+
+    const result = document.getElementById('result')
+
+    someForm.addEventListener('submit', (s) => {
+        s.preventDefault();
+        const nameValue = someForm.name.value;
+        const surnameValue = someForm.surname.value;
+        const ageValue = +someForm.age.value;
+        let obj = {nameValue, surnameValue, ageValue};
+        console.log(obj);
+        result.innerText = obj.nameValue + ' ' + obj.surnameValue + ' ' + obj.ageValue
+    });
+
+    ////////////////////////////////////////////////
+
+    let currentNumber = +localStorage.getItem('number') || 0;
+    currentNumber += 1;
+    localStorage.setItem('number', currentNumber);
+
+    document.getElementById('block').innerText = currentNumber;
+
+    ////////////////////////////////////////////////
+
+    let sessionsList = JSON.parse(localStorage.getItem('sessionsList')) || [];
+    sessionsList.push(new Date());
+    localStorage.setItem('sessionsList', JSON.stringify(sessionsList));
+
+    ////////////////////////////////////////////////
+
+    const input = document.getElementById('foo')
+    const resDiv = document.getElementById('res')
+    input.oninput = function () {
+
+        resDiv.innerText = +this.value * 2.2;
+    }
+
+    ////////////////////////////////////////////////
+
+    const table = document.getElementById('table');
+    const tableGeneratorForm = document.forms['tableGeneratorForm'];
+
+    tableGeneratorForm.onsubmit = function (e) {
+        e.preventDefault();
+        const linesValue = +tableGeneratorForm.lines.value;
+        const cellsValue = +tableGeneratorForm.cells.value;
+        const dataValue = tableGeneratorForm.data.value;
+        console.log(linesValue, cellsValue, dataValue)
+
+        for (let i = 0; i < linesValue; i++) {
+            const tr = document.createElement('tr');
+            for (let j = 0; j < cellsValue; j++) {
+                const td = document.createElement('td');
+                td.innerText = dataValue;
+                tr.appendChild(td);
+            }
+
+            table.appendChild(tr);
+        }
+    };
+
+    ////////////////////////////////////////////////
+
+    function addToLocalStorage(arrayName, objToAdd) {
+        lsItem = localStorage.getItem(arrayName)
+        if (!lsItem) {
+            throw new Error('there is no such array');
+        }
+
+        const array = JSON.parse(lsItem);
+        if (typeof objToAdd === 'object') {
+            array.push(objToAdd);
+        }
+        localStorage.setItem(arrayName, JSON.stringify(array));
+    }
+
+    addToLocalStorage('sessionsList', {});
+
+
+</script>
+</body>
+</html>
